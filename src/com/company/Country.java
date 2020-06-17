@@ -5,6 +5,10 @@ public class Country {
     private int area;
     private int population;
 
+    public Country() {
+
+    }
+
     public Country(String name, int population, int area) {
         this.name = name;
         this.population = population;

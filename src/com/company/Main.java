@@ -1,12 +1,10 @@
 package com.company;
 
-import com.company.compare.CountryComparator;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Main {
@@ -39,23 +37,18 @@ public class Main {
         while (!choice.contentEquals("foo")) { //არასწორი მონაცემს თუ შემოიყვანს ეს ციკლი თავიდან შემოაყვანინებს
             // (ზოგადად ვარჩევდი ასარჩევებში მეოთხე ოფციის დამატებას "პროგრამიდან გამოსვლა/დასრულება)
             if (choice.contentEquals("1")) { //== არ ადარებდა კარგად და ეს ვარჩიე თან როგორც მივხვდი ზუსტად bufferreader ისთვის გამოიყენება
-                CountryComparator.ByName ByName = new CountryComparator.ByName();
-                datalist.sort(ByName);
-                Collections.reverse(datalist); //ეს რახან ვიპოვე გამოვიყენე თორე ფორ ციკლით შემეძლო უკნიდან ამობეჭვდა
+                datalist.sort((Country c1, Country c2)->-1 * c1.getName().compareTo(c2.getName()));
                 System.out.println(datalist); //ესეთი ტიპის ამობეჭდა ვარჩიე კვლავ :დდ სილამაზისთვის For each შეიძლება
                 choice = "foo";
             } else if (choice.contentEquals("2")) {
-                CountryComparator.ByArea ByArea = new CountryComparator.ByArea();
-                datalist.sort(ByArea);
-                Collections.reverse(datalist);
+
+                datalist.sort((Country c1, Country c2)->-1 * Integer.compare(c1.getArea(),(c2.getArea()))) ;
 
                 System.out.println(datalist);
                 choice = "foo";
             } else if (choice.contentEquals("3")) {
-                CountryComparator.ByPopulation ByPopulation = new CountryComparator.ByPopulation();
-                datalist.sort(ByPopulation);
-                Collections.reverse(datalist);
 
+                datalist.sort((Country c1, Country c2)->-1 * Integer.compare(c1.getPopulation(),(c2.getPopulation()))) ;
                 System.out.println(datalist);
                 choice = "foo";
             } else {
