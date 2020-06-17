@@ -20,16 +20,17 @@ public class Main {
 
         String line;
         line = br.readLine(); //სათაური წავაკითხე ჯერ ლისტში რო არ ჩაყრილიყო
-        for (int i = 0; i < 11; i++) {         //(index out of bound ერრორს მიგდებდა და როგორც მივხვდი ფაილშია ცარიელი ხაზებო)
+        while (br.ready()) {         //(index out of bound ერრორს მიგდებდა და როგორც მივხვდი ფაილშია ცარიელი ხაზებო)
             // ვიცი ასე არ უნდა გამეკეთებინა მაგრამ ვერაფერი მოუხერხე ცარიელ ხაზებს :/ trim/isEmpty
             line = br.readLine();       //ფაილისთვის აქედან ვიწყებ კითხვას რეალურად
-            String[] values = line.split(",");
-            int population = Integer.parseInt(values[1]);                //ვარჩიე ინტზე გადამეყვანა
-            int area = Integer.parseInt(values[2]);                     //იგივე აქაც
-            Country temp = new Country(values[0], population, area);
-            datalist.add(temp);
+            if (line.length() != 0) {
+                String[] values = line.split(",");
+                int population = Integer.parseInt(values[1]);                //ვარჩიე ინტზე გადამეყვანა
+                int area = Integer.parseInt(values[2]);                     //იგივე აქაც
+                Country temp = new Country(values[0], population, area);
+                datalist.add(temp);
+            }
         }
-
         System.out.println("რომელი ველის მიხედვით გსურს რომ დავალაგო ქვეყნები?");
         System.out.println("1. სახელის მიხედვით");
         System.out.println("2. ფართობის მიხედვით");
