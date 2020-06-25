@@ -5,9 +5,10 @@ public enum Parameters {
     SURNAME("surname"),
     BIRTHPLACE("birthplace");
     private String choice;
-Parameters(String choice){
-this.choice = choice;
-}
+
+    Parameters(String choice) {
+        this.choice = choice;
+    }
 
     public String getChoice() {
         return choice;

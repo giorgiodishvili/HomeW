@@ -1,18 +1,18 @@
 package com.company.person;
 
 public class Person {
-    private String name="";
-    private String surname="";
-    private String birthTown="";
-    public Person(){
+    private String name;
+    private String surname;
+    private String birthTown;
 
-    }
-    public Person(String name,String surname,String birthTown){
-        this.birthTown=birthTown;
-        this.name=name;
-        this.surname=surname;
+    public Person() {
     }
 
+    public Person(String name, String surname, String birthTown) {
+        this.birthTown = birthTown;
+        this.name = name;
+        this.surname = surname;
+    }
 
     public void setBirthTown(String birthTown) {
         this.birthTown = birthTown;
@@ -25,6 +25,7 @@ public class Person {
     public void setSurname(String surname) {
         this.surname = surname;
     }
+
 
     public String getName() {
         return name;

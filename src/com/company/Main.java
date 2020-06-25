@@ -1,12 +1,13 @@
 package com.company;
 
 
-import com.company.person.Parameters;
 import com.company.person.Person;
 import com.company.person.PersonGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 public class Main {
@@ -20,9 +21,9 @@ public class Main {
         personlist.add(new Person("7765", "Sam", "California"));
         personlist.add(new Person("3442", "Max", "New York"));
 
+        Optional<Map<String, List<Person>>> groupOptional = PersonGroup.groupByMisha1(personlist, null);
 
-        new PersonGroup().group(personlist, Parameters.SURNAME);
-new PersonGroup().a=2;
+        groupOptional.ifPresent(map -> map.forEach((key, people) -> System.out.println(key + " " + people + "\n")));
     }
 
     public static int fun(String str) {
