@@ -1,9 +1,6 @@
 package com.company.person;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -47,6 +44,62 @@ public class PersonGroup {
                 return Optional.of(stream.collect(Collectors.groupingBy(Person::getBirthTown)));
         }
         return Optional.empty();
+    }
+
+    public static List<Group<?>> groupByMisha2(Collection<Person> personList, Parameters parameters) {
+        List<Group<?>> groupList = new ArrayList<>();
+
+        personList.forEach(person -> {
+            Object key = null;
+            switch (parameters) {
+                case NAME:
+                    key = person.getName();
+                    break;
+                case SURNAME:
+                    key = person.getSurname();
+                    break;
+                case BIRTHPLACE:
+                    key = person.getBirthTown();
+                    break;
+            }
+            int i = groupList.indexOf(new Group<>(key));
+            Group<?> group = new Group<>(key);
+            if (i < 0) {
+                groupList.add(group);
+            } else {
+                group = groupList.get(i);
+            }
+
+            group.add(person);
+        });
+
+        return groupList;
+    }
+
+    public static Optional<Map<String, List<Person>>> groupByMisha3(Collection<Person> personList, Parameters parameters) {
+        Map<String, List<Person>> result = new HashMap<>();
+        personList.forEach(person -> {
+            String key = null;
+            switch (parameters) {
+                case NAME:
+                    key = person.getName();
+                    break;
+                case SURNAME:
+                    key = person.getSurname();
+                    break;
+                case BIRTHPLACE:
+                    key = person.getBirthTown();
+                    break;
+            }
+            List<Person> people = result.get(key);
+            if (people == null) {
+                people = new ArrayList<>();
+                result.put(key, people);
+            }
+            people.add(person);
+
+        });
+        return Optional.of(result);
     }
 
 }

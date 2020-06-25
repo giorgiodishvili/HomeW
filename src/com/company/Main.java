@@ -1,6 +1,8 @@
 package com.company;
 
 
+import com.company.person.Group;
+import com.company.person.Parameters;
 import com.company.person.Person;
 import com.company.person.PersonGroup;
 
@@ -21,9 +23,12 @@ public class Main {
         personlist.add(new Person("7765", "Sam", "California"));
         personlist.add(new Person("3442", "Max", "New York"));
 
-        Optional<Map<String, List<Person>>> groupOptional = PersonGroup.groupByMisha1(personlist, null);
+        Optional<Map<String, List<Person>>> groupOptional = PersonGroup.groupByMisha1(personlist, Parameters.BIRTHPLACE);
 
         groupOptional.ifPresent(map -> map.forEach((key, people) -> System.out.println(key + " " + people + "\n")));
+
+        List<Group<?>> groupList = PersonGroup.groupByMisha2(personlist, Parameters.BIRTHPLACE);
+        System.out.println("groupList = " + groupList);
     }
 
     public static int fun(String str) {
