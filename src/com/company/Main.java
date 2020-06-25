@@ -1,62 +1,46 @@
 package com.company;
 
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.InputStreamReader;
+import com.company.person.Parameters;
+import com.company.person.Person;
+import com.company.person.PersonGroup;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        List<Country> datalist = new ArrayList<>();
-        FileReader fr = new FileReader("/home/giorgi/country.csv");
-        BufferedReader br = new BufferedReader(fr); //ციკლებს და რაღაცებს ისევ ეს ვარჩიე (გადაკეთება პრობლემა არაა :D) (( ფაილი შემოვიტანე ამით))
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); // უსერ ინფუთი
+        List<Person> personlist = new ArrayList<Person>();
+        personlist.add(new Person("Max", "Max", "California"));
+        personlist.add(new Person("Andrew", "Andrew", "Los Angeles"));
+        personlist.add(new Person("1726", "John", "New York"));
+        personlist.add(new Person("5223", "Michael", "New York"));
+        personlist.add(new Person("7765", "Sam", "California"));
+        personlist.add(new Person("3442", "Max", "New York"));
 
 
-        String line;
-        line = br.readLine(); //სათაური წავაკითხე ჯერ ლისტში რო არ ჩაყრილიყო
-        while (br.ready()) {         //(index out of bound ერრორს მიგდებდა და როგორც მივხვდი ფაილშია ცარიელი ხაზებო)
-            // ვიცი ასე არ უნდა გამეკეთებინა მაგრამ ვერაფერი მოუხერხე ცარიელ ხაზებს :/ trim/isEmpty
-            line = br.readLine();       //ფაილისთვის აქედან ვიწყებ კითხვას რეალურად
-            if (line.length() != 0) {
-                String[] values = line.split(",");
-                int population = Integer.parseInt(values[1]);                //ვარჩიე ინტზე გადამეყვანა
-                int area = Integer.parseInt(values[2]);                     //იგივე აქაც
-                Country temp = new Country(values[0], population, area);
-                datalist.add(temp);
-            }
-        }
-        System.out.println("რომელი ველის მიხედვით გსურს რომ დავალაგო ქვეყნები?");
-        System.out.println("1. სახელის მიხედვით");
-        System.out.println("2. ფართობის მიხედვით");
-        System.out.println("3. მოსახლეობის მიხედვით");
-        String choice = reader.readLine();
-        while (!choice.contentEquals("foo")) { //არასწორი მონაცემს თუ შემოიყვანს ეს ციკლი თავიდან შემოაყვანინებს
-            // (ზოგადად ვარჩევდი ასარჩევებში მეოთხე ოფციის დამატებას "პროგრამიდან გამოსვლა/დასრულება)
-            if (choice.contentEquals("1")) { //== არ ადარებდა კარგად და ეს ვარჩიე თან როგორც მივხვდი ზუსტად bufferreader ისთვის გამოიყენება
-                datalist.sort((Country c1, Country c2)->-1 * c1.getName().compareTo(c2.getName()));
-                System.out.println(datalist); //ესეთი ტიპის ამობეჭდა ვარჩიე კვლავ :დდ სილამაზისთვის For each შეიძლება
-                choice = "foo";
-            } else if (choice.contentEquals("2")) {
-
-                datalist.sort((Country c1, Country c2)->-1 * Integer.compare(c1.getArea(),(c2.getArea()))) ;
-
-                System.out.println(datalist);
-                choice = "foo";
-            } else if (choice.contentEquals("3")) {
-
-                datalist.sort((Country c1, Country c2)->-1 * Integer.compare(c1.getPopulation(),(c2.getPopulation()))) ;
-                System.out.println(datalist);
-                choice = "foo";
-            } else {
-                System.out.println("გთხოვთ შემოიყვანოთ სწორი მონაცემი. (1,2,3) ");
-                choice = reader.readLine();
-            }
-        }
+        new PersonGroup().group(personlist, Parameters.SURNAME);
+new PersonGroup().a=2;
     }
+
+    public static int fun(String str) {
+        int ans = Pattern.compile(",")
+                .splitAsStream(str)
+                .map(Integer::parseInt)
+                .reduce(0, Integer::sum);
+
+        return ans;
+//         int ans=0;
+//        String[] split = s.split(",");
+//        for(int i=0;i<split.length;i++){
+//            int temp=Integer.parseInt(split[i]);
+//            ans+=temp;
+//        }
+//        return ans;
+    }
+
 }
 //მადლობა ყურადღებისთვის :დდ
 
